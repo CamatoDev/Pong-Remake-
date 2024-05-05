@@ -2,6 +2,7 @@
 #include <iostream>
 
 bool ButtonCollision(float curseur_x, float curseur_y, sf::RectangleShape box, float box_width, float box_height);
+bool BallCollision(sf::RectangleShape player, sf::CircleShape ball, float player_width, float rayon);
 void GoalPlayer1(sf::CircleShape& ball, int& goal1);
 void GoalPlayer2(sf::CircleShape& ball, int& goal2);
 void LoadFont();
@@ -152,24 +153,17 @@ void GameStart() {
 			}
 
 			//collision avec le joueur1 
-			float col_x1 = player1.getPosition().x - ball.getPosition().x;
-			float col_y1 = player1.getPosition().y - ball.getPosition().y;
-			float dist_p1_ball = (player1.getPosition().x) + (rayon);
-			//speed_f = ((m1 - m2)*speed + (2*m2*speed2))/ (m1 + m2);
-			if ((col_x1 * col_x1 + col_y1 * col_y1) <= dist_p1_ball * dist_p1_ball) {
-				sf::Vector2f speed_ball_f = ((player_mass - ball_mass) * playerSpeed + (2 * ball_mass * ballSpeed)) / (player_mass + ball_mass);
+			if (BallCollision(player1, ball, player_width, rayon)) {
+				//speed_f = ((m1 - m2)*speed + (2*m2*speed2))/ (m1 + m2);
+				//sf::Vector2f speed_ball_f = ((player_mass - ball_mass) * playerSpeed + (2 * ball_mass * ballSpeed)) / (player_mass + ball_mass);
 
 				ballSpeed = -ballSpeed;
 			}
 
 			//collision avec le joueur2
-			float col_x2 = ball.getPosition().x - player2.getPosition().x;
-			float col_y2 = ball.getPosition().y - player2.getPosition().y;
-			float dist_p2_ball = (player2.getPosition().x + player_width / 2) + (rayon);
-			//speed_f = ((m1 - m2)*speed + (2*m2*speed2))/ (m1 + m2);
-			if ((col_x2 * col_x2 + col_y2 * col_y2) <= dist_p2_ball * dist_p2_ball) {
+			if (BallCollision(player2, ball, player_width, rayon)) {
 				std::cout << "ok" << std::endl;
-				sf::Vector2f speed_ball_f = ((player_mass - ball_mass) * playerSpeed + (2 * ball_mass * ballSpeed)) / (player_mass + ball_mass);
+				/*sf::Vector2f speed_ball_f = ((player_mass - ball_mass) * playerSpeed + (2 * ball_mass * ballSpeed)) / (player_mass + ball_mass);*/
 
 				//ballSpeed = -ballSpeed;
 			}
@@ -383,6 +377,19 @@ bool ButtonCollision(float curseur_x, float curseur_y, sf::RectangleShape box, f
 		return true;
 	else
 		return false;
+}
+
+//collision entre la balle et un joueur 
+bool BallCollision(sf::RectangleShape player, sf::CircleShape ball, float player_width, float rayon) {
+	float col_x1 = player.getPosition().x - ball.getPosition().x;
+	float col_y1 = player.getPosition().y - ball.getPosition().y;
+	float dist_player_ball = (player.getPosition().x) + (rayon);
+
+	//check 
+	if ((col_x1 * col_x1 + col_y1 * col_y1) <= dist_player_ball * dist_player_ball) {
+		return true;
+	}
+	return false;
 }
 
 
