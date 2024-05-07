@@ -671,8 +671,8 @@ bool BallCollision2(sf::RectangleShape player, sf::CircleShape ball, float playe
 	//check 
 	if (ball.getPosition().x + rayon > player.getPosition().x - player_width &&
 		ball.getPosition().x + rayon < player.getPosition().x &&
-		ball.getPosition().y + rayon >= player.getPosition().y - player_height &&
-		ball.getPosition().y - rayon <= player.getPosition().y + player_height)
+		ball.getPosition().y + rayon >= player.getPosition().y - player_height / 2.f &&
+		ball.getPosition().y - rayon <= player.getPosition().y + player_height / 2.f)
 		return true;
 	else
 		return false;
@@ -683,8 +683,8 @@ bool BallCollision2(sf::RectangleShape player, sf::CircleShape ball, float playe
 	//check 
 	if (ball.getPosition().x - rayon < player.getPosition().x + player_width &&
 		ball.getPosition().x - rayon > player.getPosition().x &&
-		ball.getPosition().y + rayon >= player.getPosition().y - player_height &&
-		ball.getPosition().y - rayon <= player.getPosition().y + player_height)
+		ball.getPosition().y + rayon >= player.getPosition().y - player_height / 2.f &&
+		ball.getPosition().y - rayon <= player.getPosition().y + player_height / 2.f)
 		return true;
 	else
 		return false;
