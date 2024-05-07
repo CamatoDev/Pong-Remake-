@@ -57,6 +57,8 @@ void GameStart() {
 	background.setScale(width / 270.f, height / 186.f);
 
 	//initialisation
+	scorePlayer1 = 0;
+	scorePlayer2 = 0;
 	float player_width = 20.f;
 	float player_heigth = 120.f;
 	float player_mass = 10.f;
@@ -246,7 +248,7 @@ void GameStart() {
 			}
 
 			//on vérifie les scores 
-			if (scorePlayer1 >= 10 || scorePlayer2 >= 10) {
+			if (scorePlayer1 >= 2 || scorePlayer2 >= 2) {
 				//si l'un des deux joueurs atteint 10 points on ferme la fenêtre 
 				mainWindow.close();
 			}
@@ -698,9 +700,9 @@ void GoalPlayer1(sf::CircleShape& ball, int& goal1) {
 	ball.setPosition(width / 2.f, height / 2.f);
 	goal1 += 1;
 	std::cout << "Player 2 : " << goal1 << "\n";
-	//La partie ce termine si le joueur2 atteint 10 point 
-	if (goal1 >= 10) {
-		goal1 = 10;
+	//La partie ce termine si le joueur2 atteint 2 point 
+	if (goal1 >= 2) {
+		goal1 = 2;
 		//appelle de la fenêtre de fin
 		EndGame();
 	}
@@ -712,9 +714,9 @@ void GoalPlayer2(sf::CircleShape& ball, int& goal2) {
 	ball.setPosition(width / 2.f, height / 2.f);
 	goal2 += 1;
 	std::cout << "Player 1 : " << goal2 << "\n";
-	//La partie ce termine si le joueur1 atteint 10 point 
-	if (goal2 >= 10) {
-		goal2 = 10;
+	//La partie ce termine si le joueur1 atteint 2 point 
+	if (goal2 >= 2) {
+		goal2 = 2;
 		//appelle de la fenêtre de fin	
 		EndGame();
 	}
